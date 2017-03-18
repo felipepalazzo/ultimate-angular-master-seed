@@ -7,7 +7,12 @@ function AuthService ($firebaseAuth) {
   }
   this.register = function (user) {
     return auth
-      .$createUser(user)
+      .$createUserWithEmailAndPassword(user.email, user.password)
+      .then(storeAuthData);
+  };
+  this.login = function (user) {
+    return auth
+      .$signInWithEmailAndPassword(user.email, user.passord)
       .then(storeAuthData);
   };
 }
